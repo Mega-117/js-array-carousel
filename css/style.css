@@ -1,13 +1,16 @@
 .slider-conatiner{
-    height: 374px;
+    height: 375px;
     width: 800px;
     margin: auto;
     overflow: hidden;
 }
 
-.imgslide{
-    object-fit: contain;
-
+.img-slide{
+    object-fit: cover;
+    position: absolute;
+    opacity: 0;
+    height: 100%;
+    width: 100%;
 }
 
 .slider-conatiner > div{
@@ -15,35 +18,48 @@
 }
 
 .slide-preview{
-    height: calc(374px / 5);
+    height: calc(375px / 5);
     object-fit: contain;
 }
 
 .preview-container{
     position: relative;
+    border: 1px solid red;
+    padding: 5px;
 }
 
-.arow-ico{
+.arrow-ico{
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    color: white;
+    color: black;
     font-size: 22px;
 }
 
-.arow-top{
+.arrow-top{
     top: 2px;
 }
 
-.arow-bottom{
+.arrow-bottom{
     bottom: 2px;
 }
 .img-slide-big{
     position: relative;
+    border: 1px solid red;
+    padding: 5px;
+}
+
+.img-slide-big > img{
+    
 }
 .testi-slide{
+    z-index: 1;
     position: absolute;
     bottom: 50px;
     right: 50px;
     color: white;
+}
+
+.active{
+    opacity: 1;
 }
