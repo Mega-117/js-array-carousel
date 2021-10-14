@@ -1,0 +1,49 @@
+.slider-conatiner{
+    height: 374px;
+    width: 800px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.imgslide{
+    object-fit: contain;
+
+}
+
+.slider-conatiner > div{
+    height: 100%;
+}
+
+.slide-preview{
+    height: calc(374px / 5);
+    object-fit: contain;
+}
+
+.preview-container{
+    position: relative;
+}
+
+.arow-ico{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 22px;
+}
+
+.arow-top{
+    top: 2px;
+}
+
+.arow-bottom{
+    bottom: 2px;
+}
+.img-slide-big{
+    position: relative;
+}
+.testi-slide{
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    color: white;
+}
