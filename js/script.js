@@ -21,103 +21,134 @@ const text = [
     'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,',
     'Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam inventore eligendi ex ad ullam,',
 ];
-//recupero contenitore
-let containerBigSlide = document.querySelector(".img-slide-big");
 
-let currentIndex = 0;
-//ciclo gli items
+// 1 recupero il contenitore
+let sectionLeft = document.querySelector(".section-left");
+let sectionRight = document.querySelector(".section-right");
+
+//2 voglio selezionare un img da visualizzare per farlo creo una variabile per dare l indice dell img che voglio
+let currentIndex = 2;
+//1 faccio un ciclo dell array delle img per creare l' indirizzo src delle immagini e salvo in una variabile
 for (let i = 0; i < items.length; i++) {
-    let urlImgSlide = items[i];
-    let titleSlide = title[i];
-    let textSlide = text[i];
-
-    //per rendere visibile un elemento creo una variabile classactive vuota
+    let urlImgBig = items[i];
+    let imgTitle = title[i];
+    let imgText = text[i];
+    //1 creo una variabile per creare il codice html cambiando l src delle img usando il ciclo
+    //2 creo variabile vuota per la classe che visualizza le img 
     let classActive = "";
-    let displayText = "d-none";
+    let classText = "d-none";
+    //2 per visualizzare l img con indice 2 faccio un if nel ciclo e do il nome della classe che visualizza l img in stringa 
+    //alla variabile che visalizza l img
     if (i === currentIndex) {
-        //io voglio visualizzare la prima img
-        //quindi se la i (indice array) è 0 mi resituische la variabile active con valore stringa active
-        //che poi applico al tag img nelle classi
         classActive = "active";
-        displayText = "d-block";
-
+        classText = "d-block";
     }
+    let tagsImgBig = `<div class="img-section-left-container">
+                        <img class="${classActive}" src="${urlImgBig}" alt="img-${i + 1}">
+                        <div class="${classText} text-section-left ps-5">
+                            <h1>${imgTitle}</h1>
+                            <p>${imgText}</p>
+                        </div>
+                    </div>`;
+    //1 prendo la variabile del container dove inserire le img e inserisco tutto nell html creato dalla variabile tagimgbig
+    sectionLeft.innerHTML += tagsImgBig;
 
-
-    console.log(urlImgSlide);
-    //scrivo gli item nel tag img con la variabile active , src del arry e la i per l alt
-    let tagImg = `<img class="w-100 img-slide ${classActive}" src="${urlImgSlide}" alt="Slide ${i}">
-                    <div class="testi-slide ${displayText}">
-                         <h1>${titleSlide}</h1>
-                         <p>${textSlide}</p>
-                    </div>
-    `;
-
-    console.log("display img visibile" + displayText);
-
-    //riporto tutti i tag img nel html
-    containerBigSlide.innerHTML += tagImg;
-    /*     console.log(tagTitleSlide);
-    console.log(tagTextSlide);
- */}
+    let imgSectionRight = `<img class="${classActive}" src="${urlImgBig}" alt="img-${i + 1}">`;
+    let sectionRight = document.querySelector(".img-section-right-contaier");
+    sectionRight.innerHTML += imgSectionRight;
+}
 
 
 //frecce
+let arrowTop = document.querySelector(".arrow-top");
+let arrowBottom = document.querySelector(".arrow-bottom");
 
-let arrowtop = document.querySelector(".arrow-top");
-let arrowbottom = document.querySelector(".arrow-bottom");
-
+//dichiaro una variabile per una freccia
 
 //freccia su
-//metto la freccia in ascolto del click
-arrowtop.addEventListener("click", function () {
-    //seleziono elemento che ha la classe active e tolgo la classe active
-    let activeSlide = document.querySelector(".active");
-    console.log(activeSlide);
-    activeSlide.classList.remove("active");
+//1 metto la freccia in ascolto
+arrowTop.addEventListener("click", function () {
+    //1 creo variabile che seleziona l'elemento con la classe active
+    let activeImg = document.querySelector(".active");
+    console.log(activeImg);
+    //1 tolgo la classe active
+    activeImg.classList.remove("active");
 
     let activeText = document.querySelector(".d-block");
-    console.log(activeText);
+    console.log("textbox" + activeText);
     activeText.classList.remove("d-block");
     activeText.classList.add("d-none");
 
+    let ActiveImgPreview = sectionRight.querySelector(".active");
+    console.log(ActiveImgPreview);
+    ActiveImgPreview.classList.remove("active");
+
+
+
+
+    //1 sottaggo -1 alla variabile con l indice del img attiva
     currentIndex--;
-    console.log("index" + currentIndex);
 
-    let imgTags = containerBigSlide.querySelectorAll("img");
-    //seleziono elemento array con indice -1
-    let newSlideActive = imgTags[currentIndex];
-    newSlideActive.classList.add("active");
+    if (currentIndex < 0) {
+        currentIndex = (items.length - 1);
+    }
 
-    let allText = containerBigSlide.querySelectorAll("div.testi-slide");
-    console.log(allText);
-    let newText = allText[currentIndex];
-    newText.classList.add("d-block");
-    newText.classList.remove("d-none");
-});
+    //1 per selezionare la nuova img da visualizzare con indice -1 
+
+    //1 creo una variabile che seleziona tutti gli elementi del arrey
+    let imgTag = sectionLeft.querySelectorAll("img");
+    console.log(imgTag);
+    //1 per selezionare la nuova img con indice -1 faccio una nuova var e applico la classe active
+    let newActiveImg = imgTag[currentIndex];
+    newActiveImg.classList.add("active");
+
+    let textBox = document.querySelectorAll(".text-section-left");
+    console.log("textbox" + textBox);
+    newActiveText = textBox[currentIndex];
+    newActiveText.classList.remove("d-none");
+    newActiveText.classList.add("d-block");
+
+    let imgPreview = sectionRight.querySelectorAll("img");
+    console.log("new" + imgPreview);
+    newActiveImgPreview = imgPreview[currentIndex];
+    newActiveImgPreview.classList.add("active");
+
+
+});;
 
 //freccia giu
 
-arrowbottom.addEventListener("click", function () {
-    let activeSlide = document.querySelector(".active");
-    activeSlide.classList.remove("active");
+arrowBottom.addEventListener("click", function () {
+    activeImg = document.querySelector(".active");
+    activeImg.classList.remove("active");
 
     let activeText = document.querySelector(".d-block");
-    console.log(activeText);
+    console.log("textbox" + activeText);
     activeText.classList.remove("d-block");
     activeText.classList.add("d-none");
 
+    let ActiveImgPreview = sectionRight.querySelector(".active");
+    console.log(ActiveImgPreview);
+    ActiveImgPreview.classList.remove("active");
+
 
     currentIndex++;
+    if (currentIndex > items.length - 1) {
+        currentIndex = 0;
+    }
+    imgTag = sectionLeft.querySelectorAll("img");
+    newActiveImg = imgTag[currentIndex];
+    newActiveImg.classList.add("active");
 
-    let imgTags = containerBigSlide.querySelectorAll("img");
+    let textBox = document.querySelectorAll(".text-section-left");
+    console.log("textbox" + textBox);
+    newActiveText = textBox[currentIndex];
+    newActiveText.classList.remove("d-none");
+    newActiveText.classList.add("d-block");
 
-    let newTagActiveButtom = imgTags[currentIndex];
-    newTagActiveButtom.classList.add("active");
+    let imgPreview = sectionRight.querySelectorAll("img");
+    console.log("new" + imgPreview);
+    newActiveImgPreview = imgPreview[currentIndex];
+    newActiveImgPreview.classList.add("active");
 
-    let allText = containerBigSlide.querySelectorAll("div.testi-slide");
-    console.log(allText);
-    let newText = allText[currentIndex];
-    newText.classList.add("d-block");
-    newText.classList.remove("d-none");
 });

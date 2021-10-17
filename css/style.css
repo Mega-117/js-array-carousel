@@ -1,65 +1,73 @@
-.slider-conatiner{
-    height: 375px;
-    width: 800px;
+
+
+.box-slider{
+    width: 850px;
+    height: 400px;
     margin: auto;
     overflow: hidden;
 }
 
-.img-slide{
-    object-fit: cover;
-    position: absolute;
-    opacity: 0;
+.section-left{
     height: 100%;
+    position: relative;
+}
+
+.section-left img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    opacity: 0;
+}
+
+.section-right{
+    position: relative;
+    background-color: black;
+}
+
+.section-right img{
+    height: calc( 400px / 5 );
+    opacity: 0.7;
     width: 100%;
 }
 
-.slider-conatiner > div{
+
+.img-section-left-container{
+    width: 100%;
     height: 100%;
+    position: absolute;
 }
 
-.slide-preview{
-    height: calc(375px / 5);
-    object-fit: contain;
-}
-
-.preview-container{
-    position: relative;
-    border: 1px solid red;
-    padding: 5px;
+.text-section-left{
+    position: absolute;
+    bottom: 25px;
+    right: 30px;
+    color: white;
+    text-shadow: 1px 2px black;
 }
 
 .arrow-ico{
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    color: black;
+    color:white;
     font-size: 22px;
 }
 
 .arrow-top{
-    top: 2px;
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .arrow-bottom{
-    bottom: 2px;
-}
-.img-slide-big{
-    position: relative;
-    border: 1px solid red;
-    padding: 5px;
-}
-
-.img-slide-big > img{
-    
-}
-.testi-slide{
-    z-index: 1;
     position: absolute;
-    bottom: 50px;
-    right: 50px;
-    color: white;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.img-section-right-contaier img.active, 
+.section-left .img-section-left-container .active{
+    opacity: 1;
 }
 
-.active{
-    opacity: 1;
+.img-section-right-contaier img.active{
+    border: 3px solid white;
 }
